@@ -11,6 +11,7 @@ public class Tile {
     public int width, height;
     public String name;
     public int x, y;
+    public Rectangle solidArea;
 
     public BufferedImage image;
 
@@ -29,9 +30,16 @@ public class Tile {
         this.gp = gp;
         width = gp.TILE_SIZE;
         height = gp.TILE_SIZE;
+
+        solidArea = new Rectangle(x, y, width, height);
     }
 
     public void draw(Graphics2D g2) {
+        solidArea.x = x;
+        solidArea.y = y;
         g2.drawImage(image, x, y, width, height, null);
+
+        g2.setColor(new Color(255, 0, 0, 100));
+        g2.fillRect(solidArea.x, solidArea.y, width, height);
     }
 }
